@@ -10,8 +10,9 @@ const url = require('node:url');
 const fs = require('node:fs');
 
 // Dep
-const config = require('./config');
+const config = require('./lib/config');
 const handlers = require('./lib/handlers');
+const helpers = require('./lib/helpers');
 
 // Unified server
 let unifiedServer = function(req, res) {
@@ -49,7 +50,7 @@ let unifiedServer = function(req, res) {
             queryStringObject,
             method,
             headers,
-            payload: buffer
+            payload: helpers.parseJSONToObject(buffer)
         }
 
         // Route to handler
@@ -95,5 +96,6 @@ httpsServer.listen(config.httpsPort, () => {
 
 // Request Router
 let router = {
-    'ping': handlers.ping
+    ping: handlers.ping,
+    users: handlers.users
 }
