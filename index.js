@@ -11,6 +11,7 @@ const fs = require('node:fs');
 
 // Dep
 const config = require('./config');
+const handlers = require('./lib/handlers');
 
 // Unified server
 let unifiedServer = function(req, res) {
@@ -90,20 +91,7 @@ httpServer.listen(config.httpPort, () => {
 // start HTTPS server
 httpsServer.listen(config.httpsPort, () => {
     console.log("Listening on port ", config.httpsPort);
-})
-
-// Handlers
-let handlers = {}
-
-// Ping handler
-handlers.ping = function(data, callback) {
-    callback(200);
-}
-
-// 404
-handlers.notFound = function (data, callback) {
-    callback(404);
-}
+});
 
 // Request Router
 let router = {
