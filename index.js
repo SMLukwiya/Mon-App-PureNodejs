@@ -4,13 +4,16 @@
 
 // Node Dep
 const http = require('node:http');
+const https = require('node:https');
 const { StringDecoder } = require('node:string_decoder');
 const url = require('node:url');
+const fs = require('node:fs');
 
 // Dep
 const config = require('./config');
 
-const server = http.createServer((req, res) => {
+// Unified server
+let unifiedServer = function(req, res) {
     // Parse URL
     let parsedUrl = url.parse(req.url, true);
 
@@ -63,11 +66,30 @@ const server = http.createServer((req, res) => {
             console.log(statusCode, payloadString)
         })
     })
+}
+
+// Instantiate HTTP server
+const httpServer = http.createServer((req, res) => {
+    unifiedServer(req, res);
 })
 
-// start server
-server.listen(config.port, () => {
-    console.log("Listening on port ", config.port);
+// Instantiate HTTPS server
+let httpsServerOptions = {
+    key: fs.readFileSync('./https/rootCA.key'),
+    cert: fs.readFileSync('./https/rootCA.crt')
+}
+const httpsServer = https.createServer(httpsServerOptions, (req, res) => {
+    unifiedServer(req, res);
+})
+
+// start HTTP server
+httpServer.listen(config.httpPort, () => {
+    console.log("Listening on port ", config.httpPort);
+})
+
+// start HTTPS server
+httpsServer.listen(config.httpsPort, () => {
+    console.log("Listening on port ", config.httpsPort);
 })
 
 // handlers
