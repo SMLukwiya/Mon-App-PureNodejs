@@ -11,7 +11,11 @@ let app = {}
 
 // Init function
 app.init = function () {
+    // Start server
+    server.init()
 
+    // Start workers
+    // workers.init()
 }
 
 // Execute
