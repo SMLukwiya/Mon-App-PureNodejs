@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- General settings -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="{global.baseUrl}" />
+
+    <!-- Meta Tags -->
+    <title>{head.title} | {global.appName}</title>
+    <meta name="description" content="{head.description}">
+
+    <!-- Static assets -->
+    <link type="image/x-icon" rel="icon" href="favicon.ico">
+    <script type="text/javascript" charset="utf-8" src="public/app.js"></script>
+    <link rel="stylesheet" type="text/css" href="public/app.css" />
+</head>
+<body class="{body.class}">
+    <!-- Page Wrapper -->
+    <div class="wrapper">
+
+        <!-- Header -->
+        <div class="header">
+            <!-- Logo -->
+            <a class="logo" href="/"></a>
+            <!-- Navigation -->
+            <ul class="menu">
+                <li>
+                    <a href="/">Home</a>
+                </li>
+                <li>
+                    <a class="loggedOut" href="/">Signup</a>
+                </li>
+                <li>
+                    <a class="loggedOut" href="/">Login</a>
+                </li>
+                <li>
+                    <a class="loggedIn" href="/">Dashboard</a>
+                </li>
+                <li>
+                    <a class="loggedIn" href="/">Account Settings</a>
+                </li>
+                <li>
+                    <a href="/">Logout</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Page specific content -->
+        <div class="content">
