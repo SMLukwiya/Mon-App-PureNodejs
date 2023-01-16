@@ -132,3 +132,8 @@ app.init = function () {
     // Bind all form submissions
     app.bindForms();
 }
+
+// Call app init after the window has loaded
+window.onload = function () {
+    app.init();
+}
