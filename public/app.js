@@ -119,3 +119,11 @@ app.client = {
         })
     }
 }
+
+app.formResponseProcessor = function (formId, requestPayload, responsePayload) {
+    let functionToCall = false;
+    if (formId == 'accountCreate') {
+        console.log("account creation form successfully submitted");
+        // TODO: Response to successful account creation
+    }
+}
