@@ -127,3 +127,8 @@ app.formResponseProcessor = function (formId, requestPayload, responsePayload) {
         // TODO: Response to successful account creation
     }
 }
+
+app.init = function () {
+    // Bind all form submissions
+    app.bindForms();
+}
