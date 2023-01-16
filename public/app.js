@@ -77,5 +77,45 @@ app.client = {
             }
         })
 
+    },
+    bindForms: function () {
+        document.querySelector('form').addEventListener('submit', function (e) {
+
+            // Prevent form from submitting
+            e.preventDefault();
+            let formId = this.id;
+            let path = this.action;
+            let method = this.method.toUpperCase();
+
+            // Hide error message (if it's the previous error)
+            document.querySelector(`#${formId} .formError`).style.display = 'hidden';
+
+            // Change form inputs into payload
+            let payload = {};
+            let elements = this.elements;
+            for (let i = 0; i < elements.length; i++) {
+                if (elements[i].type !== 'submit') {
+                    let valueOfElement = elements[i].type == 'checkbox' ? elements[i].checked : elements[i].val;
+                    payload[elements[i].name] = valueOfElement;
+                }
+            }
+
+            // Call the API
+            app.client.request(undefined, path, method, undefined, payload, (statusCode, responsePayload) => {
+                if (statusCode !== 200) {
+                    // Get error from the api or set default error message
+                    let error = typeof(responsePayload.Error) == 'string' ? responsePayload.Error : 'Something went wrong!'
+
+                    // Set error text in the formError field
+                    document.querySelector(`#${formId} .formError`).innerHTML = error;
+
+                    // Unhide the form error field on the form
+                    document.querySelector(`#${formId} .formError`).style.display = 'block';
+                } else {
+                    // If call is successful, send response to form response processor
+                    app.formResponseProcessor(formId, payload, responsePayload);
+                }
+            })
+        })
     }
 }
