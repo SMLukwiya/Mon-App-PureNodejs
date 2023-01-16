@@ -97,7 +97,7 @@ app.bindForms = function () {
         let elements = this.elements;
         for (let i = 0; i < elements.length; i++) {
             if (elements[i].type !== 'submit') {
-                let valueOfElement = elements[i].type == 'checkbox' ? elements[i].checked : elements[i].val;
+                let valueOfElement = elements[i].type == 'checkbox' ? elements[i].checked : elements[i].value;
                 payload[elements[i].name] = valueOfElement;
             }
         }
