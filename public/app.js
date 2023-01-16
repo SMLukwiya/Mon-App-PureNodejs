@@ -58,7 +58,7 @@ app.client = {
             method,
             headers,
             mode: 'cors',
-            body: method == 'GET' ? JSON.stringify(payload) : null
+            body: method !== 'GET' ? JSON.stringify(payload) : null
         })
         .then(response => {
             let statusCode = response.status;
