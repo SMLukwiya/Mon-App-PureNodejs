@@ -232,6 +232,17 @@ app.renewToken = function (callback) {
     }
 }
 
+// Loop to renew token often
+app.tokenRenewalLopp = function () {
+    setInterval(() => {
+        app.renewToken((err) => {
+            if (!err) {
+                console.log("Token renewed successfully @ " + Date.now());
+            }
+        })
+    }, 1000 * 60);
+}
+
 app.init = function () {
     // Bind all form submissions
     app.bindForms();
