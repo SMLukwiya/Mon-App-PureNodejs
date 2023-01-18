@@ -148,6 +148,12 @@ app.formResponseProcessor = function (formId, requestPayload, responsePayload) {
             }
         });
     }
+
+    // If login successful, set token in localStorage and redirect the user
+    if (formId == 'sessionCreate') {
+        app.setSessionToken(responsePayload);
+        window.location = '/checks/all';
+    }
 }
 
 // Get session token from localstorage and set it in the app.config object
