@@ -126,8 +126,27 @@ app.bindForms = function () {
 app.formResponseProcessor = function (formId, requestPayload, responsePayload) {
     let functionToCall = false;
     if (formId == 'accountCreate') {
-        console.log("account creation form successfully submitted");
-        // TODO: Response to successful account creation
+        // Take the form and password, and use it to log the user in
+        let newPayload = {
+            phone: requestPayload.phone,
+            password: requestPayload.password
+        };
+
+        app.client.request(undefined, 'api/tokens', 'POST', undefined, newPayload, (newStatusCode, newResponsePayload) => {
+            // Display error the form when encountered
+            if (newStatusCode !== 200) {
+                
+                // Set formError field width error text
+                document.querySelector(`#${formId} .formError`).innerHTML = 'Sorry, an error was encountered';
+
+                // Show (unhide) the formError field
+                document.querySelector(`#${formId} .formError`).style.display = 'block';
+            } else {
+                // Successful, set Token redirect user
+                app.setSessionToken(newResponsePayload);
+                window.location = '/checks/all';
+            }
+        });
     }
 }
 
