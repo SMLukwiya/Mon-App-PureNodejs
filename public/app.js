@@ -150,6 +150,19 @@ app.formResponseProcessor = function (formId, requestPayload, responsePayload) {
     }
 }
 
+// Set session token in app.config object and in localstorage
+app.setSessionToken = function (token) {
+    app.config.sessionToken = token;
+    let tokenString = JSON.stringify(token);
+    localStorage.setItem('token', tokenString);
+
+    if (typeof(token) == 'object') {
+        app.setLoggedInClass(true);
+    } else {
+        app.setLoggedInClass(false);
+    }
+}
+
 app.init = function () {
     // Bind all form submissions
     app.bindForms();
