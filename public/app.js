@@ -194,6 +194,44 @@ app.setSessionToken = function (token) {
     }
 }
 
+// Renew the token
+app.renewToken = function (callback) {
+    let currentToken = typeof(app.config.sessionToken) == 'object' ? app.config.sessionToken : false;
+
+    if (currentToken) {
+        // 
+        let payload = {
+            id: currentToken.id,
+            extend: true
+        };
+
+        app.client.request(undefined, 'api/tokens', 'PUT', undefined, payload, (statusCode, responsePayload) => {
+            // Display error on form
+            if (statusCode == 200) {
+                // get new token details
+                let queryStringObject = {'id': currentToken.id};
+
+                app.client.request(undefined, 'api/tokens', 'GET', queryStringObject, undefined, (statusCode, responsePayload) => {
+                    // Display error on form when encountered
+                    if(statusCode == 200) {
+                        app.setSessionToken(responsePayload);
+                        callback(false);
+                    } else {
+                        app.setSessionToken(false);
+                        callback(true)
+                    }
+                });
+            } else {
+                app.setSessionToken(false);
+                callback(true)
+            }
+        });
+    } else {
+        app.setSessionToken(false);
+        callback(true);
+    }
+}
+
 app.init = function () {
     // Bind all form submissions
     app.bindForms();
