@@ -150,6 +150,16 @@ app.formResponseProcessor = function (formId, requestPayload, responsePayload) {
     }
 }
 
+// Set (or remove) loggedIn class from the body
+app.setLoggedInClass = function (add) {
+    let target = document.querySelector('body');
+    if (add) {
+        target.classList.add('loggedIn');
+    } else {
+        target.classList.remove('loggedIn')
+    }
+}
+
 // Set session token in app.config object and in localstorage
 app.setSessionToken = function (token) {
     app.config.sessionToken = token;
