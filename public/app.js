@@ -81,13 +81,16 @@ app.client = {
 }
 
 // Bind logout button
-document.getElementById('logoutButton').addEventListener('click', (e) => {
-    // Stop default redirect behaviour
-    e.preventDefault();
+app.bindLogoutButton = function () {
+    document.getElementById('logoutButton').addEventListener('click', (e) => {
+        // Stop default redirect behaviour
+        e.preventDefault();
+    
+        // Logout user
+        app.logUserOut()
+    })
+}
 
-    // Logout user
-    app.logUserOut();
-})
 
 // Logout user then redirect them
 app.logUserOut = function () {
