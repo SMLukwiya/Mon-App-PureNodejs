@@ -87,7 +87,25 @@ document.getElementById('logoutButton').addEventListener('click', (e) => {
 
     // Logout user
     app.logUserOut();
-});
+})
+
+// Logout user then redirect them
+app.logUserOut = function () {
+    // Get the current token id
+    let tokenId = typeof(app.config.sessionToken.id) == 'string' ? app.config.sessionToken.id : false;
+
+    // Delete current token from tokens 
+    let queryStringObject = {
+        id: tokenId
+    }
+    app.client.request(undefined, 'api/tokens', 'DELETE', queryStringObject, undefined, (code, response) => {
+        // Remove app.config token
+        app.setSessionToken(false);
+
+        // Send the user to logged out page
+        window.location = '/session/deleted';
+    })
+}
 
 app.bindForms = function () {
     if (document.querySelector("form")) {
