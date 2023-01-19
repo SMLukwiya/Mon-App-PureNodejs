@@ -80,6 +80,15 @@ app.client = {
     }
 }
 
+// Bind logout button
+document.getElementById('logoutButton').addEventListener('click', (e) => {
+    // Stop default redirect behaviour
+    e.preventDefault();
+
+    // Logout user
+    app.logUserOut();
+});
+
 app.bindForms = function () {
     if (document.querySelector("form")) {
         document.querySelector('form').addEventListener('submit', function (e) {
@@ -239,7 +248,7 @@ app.renewToken = function (callback) {
 }
 
 // Loop to renew token often
-app.tokenRenewalLopp = function () {
+app.tokenRenewalLoop = function () {
     setInterval(() => {
         app.renewToken((err) => {
             if (!err) {
@@ -249,9 +258,19 @@ app.tokenRenewalLopp = function () {
     }, 1000 * 60);
 }
 
+// Init (bootstrap)
 app.init = function () {
     // Bind all form submissions
     app.bindForms();
+
+    // Bind logout button
+    app.bindLogoutButton();
+
+    // Get token from localStorage
+    app.getSessionToken();
+
+    // Renew token
+    app.tokenRenewalLoop();
 }
 
 // Call app init after the window has loaded
