@@ -261,14 +261,13 @@ app.loadAccountEditPage = function () {
 
                 // put hidden form field in both forms
                 let hiddenPhoneInputs = document.querySelector('input.hiddenPhoneNumberInput')
-                console.log(hiddenPhoneInputs)
 
                 for (let i = 0; i < hiddenPhoneInputs.length; i++) {
                     hiddenPhoneInputs[i].value = responsePayload.phone;
                 }
             } else {
                 // If response is not a 200, log out user
-                // app.logUserOut();
+                app.logUserOut();
             }
         })
     } else {
