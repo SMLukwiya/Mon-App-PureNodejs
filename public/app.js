@@ -56,7 +56,7 @@ app.client = {
         // Form http request (use fetch api)
         fetch(requestUrl, {
             method,
-            headers,
+            headers: fetchHeader,
             body: method !== 'GET' ? JSON.stringify(payload) : null
         })
         .then(response => {
