@@ -57,7 +57,6 @@ app.client = {
         fetch(requestUrl, {
             method,
             headers,
-            mode: 'cors',
             body: method !== 'GET' ? JSON.stringify(payload) : null
         })
         .then(response => {
