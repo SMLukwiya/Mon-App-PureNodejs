@@ -229,6 +229,18 @@ app.setSessionToken = function (token) {
     }
 }
 
+// Load data on the page
+app.loadDataOnPage = function () {
+    // Get the current page from the body class
+    let bodyClasses = document.querySelector('body').classList;
+    let primaryClass = typeof(bodyClasses[0]) == 'string' ? bodyClasses[0] : false;
+
+    // Logic for account settings page
+    if (primaryClass == 'accountEdit') {
+        app.loadAccountEditPage();
+    }
+}
+
 // Load the account edit page
 app.loadAccountEditPage = function () {
     // Get the phone number from the current token OR log user out if none is found
