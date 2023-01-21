@@ -338,6 +338,9 @@ app.init = function () {
 
     // Renew token
     app.tokenRenewalLoop();
+
+    // load data on page
+    app.loadDataOnPage();
 }
 
 // Call app init after the window has loaded
