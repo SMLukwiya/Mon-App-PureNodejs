@@ -229,6 +229,41 @@ app.setSessionToken = function (token) {
     }
 }
 
+// Load the account edit page
+app.loadAccountEditPage = function () {
+    // Get the phone number from the current token OR log user out if none is found
+    let phone = typeof(app.config.sessionToken.phone) == 'string' ? app.config.sessionToken.phone : false;
+
+    if (phone) {
+        // Get the user
+        let queryStringObject = {
+            phone
+        }
+
+        app.client.request(undefined, 'api/users', 'GET', queryStringObject, undefined, (statusCode, responsePayload) => {
+            if (statusCode == 200) {
+                // Put the data into the forms as values (where needed)
+                document.querySelector('#accountEdit1 .firstNameInput').value = responsePayload.firstName;
+                document.querySelector('#accountEdit1 .lastNameInput').value = responsePayload.lastName;
+                document.querySelector('#accountEdit1 .displayPhoneInput').value = responsePayload.phone;
+
+                // put hidden form field in both forms
+                let hiddenPhoneInputs = document.querySelector('input.hiddenPhoneNumberInput')
+                console.log(hiddenPhoneInputs)
+
+                for (let i = 0; i < hiddenPhoneInputs.length; i++) {
+                    hiddenPhoneInputs[i].value = responsePayload.phone;
+                }
+            } else {
+                // If response is not a 200, log out user
+                // app.logUserOut();
+            }
+        })
+    } else {
+        app.logUserOut();
+    }
+}
+
 // Renew the token
 app.renewToken = function (callback) {
     let currentToken = typeof(app.config.sessionToken) == 'object' ? app.config.sessionToken : false;
