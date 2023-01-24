@@ -183,6 +183,12 @@ app.formResponseProcessor = function (formId, requestPayload, responsePayload) {
         app.setSessionToken(responsePayload);
         window.location = '/checks/all';
     }
+
+    // If forms saved user updates successfully, show the success messages
+    let formsWithSuccessMessages = ['accountEdit1', 'accountEdit2'];
+    if (formsWithSuccessMessages.indexOf(formId) > -1) {
+        document.querySelector(`#${formId} .formSuccess`).style.display = 'block';
+    }
 }
 
 // Get session token from localstorage and set it in the app.config object
