@@ -272,7 +272,7 @@ app.loadAccountEditPage = function () {
                 document.querySelector('#accountEdit1 .displayPhoneInput').value = responsePayload.phone;
 
                 // put hidden form field in both forms
-                let hiddenPhoneInputs = document.querySelector('input.hiddenPhoneNumberInput')
+                let hiddenPhoneInputs = document.querySelectorAll('input.hiddenPhoneNumberInput')
 
                 for (let i = 0; i < hiddenPhoneInputs.length; i++) {
                     hiddenPhoneInputs[i].value = responsePayload.phone;
