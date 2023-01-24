@@ -189,6 +189,12 @@ app.formResponseProcessor = function (formId, requestPayload, responsePayload) {
     if (formsWithSuccessMessages.indexOf(formId) > -1) {
         document.querySelector(`#${formId} .formSuccess`).style.display = 'block';
     }
+
+    // If user successfully deleted their account, redirect them to the account deleted page
+    if (formId == 'accountEdit3') {
+        app.logUserOut(false);
+        window.location = '/account/deleted';
+    }
 }
 
 // Get session token from localstorage and set it in the app.config object
