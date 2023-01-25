@@ -118,6 +118,7 @@ app.bindForms = function () {
             let formId = this.id;
             let path = this.action;
             let method = this.method.toUpperCase();
+            // @TODO change action method for delete and put for fetch api
     
             // Hide error message (if it's the previous error)
             document.querySelector(`#${formId} .formError`).style.display = 'hidden';

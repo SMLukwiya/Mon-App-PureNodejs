@@ -5,7 +5,7 @@
 <h2>Edit your account details</h2>
 
 <div class="formWrapper">
-    <form id="accountEdit1" action="/api/users" method="PUT">
+    <form id="accountEdit1" action="/api/users" method="POST">
         <input type="hidden" name="_method" value="PUT" />
         <div class="formError"></div>
         <div class="formSuccess">Your changes Have Been Saved</div>
@@ -32,7 +32,7 @@
 
 <h2>Change your Password</h2>
 <div class="formWrapper">
-    <form id="accountEdit2" action="/api/users" method="PUT">
+    <form id="accountEdit2" action="/api/users" method="POST">
         <input type="hidden" name="_method" value="PUT" />
         <div class="formError"></div>
         <div class="formSuccess">Your new password has been saved successfully</div>
@@ -50,7 +50,7 @@
 <hr />
 <h2>Deleted Your Account</h2>
 <div class="formWrapper">
-    <form id="accountEdit3" action="/api/users" method="DELETE">
+    <form id="accountEdit3" action="/api/users" method="POST">
         <input type="hidden" name="_method" value="DELETE" />
         <div class="formError"></div>
         <div class="warning">Warning: This action cannot be undone. Only delete when you are sure!</div>
